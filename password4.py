@@ -1,10 +1,14 @@
+import hashlib
+import json
 def mdp():
-    import hashlib
+    
     password=input("entrez votre mot de passe: ")
     if set(password) & set("ABCDEFGHIJKLMNOPQRSTUVWXYZ")  and set(password) & set("abcefghijklmnopqrstuvwxyz") and set(password) & set("!@#$%^&*") and set(password) & set("0123456789") and len(password)>=8:
         print("mot de passe valide")
         password= hashlib.sha256(password.encode("utf-8")).hexdigest()
-
+        
+        with open('password.json','w', encoding='utf-8') as fichier:
+                  json.dump(password,fichier, indent=4, ensure_ascii=False)
     else:
         print("erreur: mot de passe insuffisant")
         mdp()
